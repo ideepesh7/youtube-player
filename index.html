@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>YouTube Player</title>
+
+  <style>
+    body {
+      background: #0f0f0f;
+      color: white;
+      text-align: center;
+      font-family: Arial;
+    }
+
+    input {
+      width: 60%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+    }
+
+    button {
+      padding: 12px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      background: red;
+      color: white;
+      cursor: pointer;
+    }
+
+    iframe {
+      margin-top: 20px;
+      width: 80%;
+      height: 450px;
+      border-radius: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>🎬 YouTube Player</h1>
+
+<input id="url" placeholder="Paste YouTube link here">
+<br>
+
+<button onclick="play()">Play</button>
+
+<br>
+
+<iframe id="player" allowfullscreen></iframe>
+
+<script>
+function getID(url) {
+  if (url.includes("youtu.be/")) {
+    return url.split("youtu.be/")[1].split("?")[0];
+  }
+  if (url.includes("v=")) {
+    return url.split("v=")[1].split("&")[0];
+  }
+  return null;
+}
+
+function play() {
+  let url = document.getElementById("url").value;
+  let id = getID(url);
+
+  if (!id) {
+    alert("Invalid URL");
+    return;
+  }
+
+  document.getElementById("player").src =
+    "https://www.youtube.com/embed/" + id + "?autoplay=1";
+}
+</script>
+
+</body>
+</html>
